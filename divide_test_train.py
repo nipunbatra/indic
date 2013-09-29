@@ -4,7 +4,6 @@ Created on Sun Sep 29 11:08:40 2013
 
 @author: nipun
 """
-import numpy as np
 from math import floor
 
 def partition_train_test(df_mains,df_appliances,train_percentage=50):
