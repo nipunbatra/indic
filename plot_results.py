@@ -16,7 +16,7 @@ matplotlib.rcParams.update({'font.size': 24})
 def draw_table(MNE, RE, filename='temp123', path=''):
     
     #Creating table header for markdown table to be rendered by github
-    file_contents="####Results\n Format: RMS Error, MNE for each of four cases:\n1. No division, No calib\n2. Load division, No calib\n3. No division, calibration\n4. Load division, calibration\n\n"
+    file_contents="####Results\nFormat: RMS Error, MNE for each of four cases:\n\n1. No division, No calib\n2. Load division, No calib\n3. No division, calibration\n4. Load division, calibration\n\n"
     
     file_contents+="|Appliance|Case0|Case0|Case1|Case1|Case2|Case2|Case3|Case3|\n"+"|---------|-----|-----|-----|-----|-----|-----|-----|-----|\n"
     for appliance in MNE[0]:
