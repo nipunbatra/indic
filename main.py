@@ -21,7 +21,7 @@ from plot_results import draw_table
 
 import sys
 
-house=1
+house=2
 path=sys.argv[1]
 print path
 print 'Loading Mains Data'
