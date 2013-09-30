@@ -21,7 +21,7 @@ from plot_results import draw_table
 
 import sys
 
-house=6
+house=7
 path=sys.argv[1]
 print path
 print 'Loading Mains Data'
@@ -32,8 +32,9 @@ df_appliances=load_appliances_data(path,labels)
 
 #Downsampling
 print 'Downsampling'
-df_mains_downsampled=downsample(df_mains)
-df_appliances_downsampled=downsample(df_appliances)
+downsampling_window='15Min'
+df_mains_downsampled=downsample(df_mains,downsampling_window)
+df_appliances_downsampled=downsample(df_appliances,downsampling_window)
 
 print 'Aligning time series'
 #Aligning mains and appliances time series
