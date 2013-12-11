@@ -1,8 +1,16 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Sep 28 21:03:29 2013
+"""NILM commandline utility
 
-@author: nipun
+Usage:
+    main.py <file_path>
+    main.py (-h | --help)
+  
+Arguments:
+    file_path Location where data for home is located    
+
+Options:
+    -sample_width    Width of the sample in mins for downsampling[default: 1min]
+    -h --help     Show this screen.
+
 """
 
 from load_data import load_mains_data
@@ -18,11 +26,17 @@ from calibration import calibrate_centroids
 from co import apply_co
 from compute_results import compute_RE_MNE
 from plot_results import draw_table
-
 import sys
 
-house=7
-path=sys.argv[1]
+from docopt import docopt
+
+print "I am here"
+arguments = docopt(__doc__, version='NILM commandline utility')
+print "here"
+print(arguments)
+house=9
+path=arguments['<file_path>']
+
 print path
 print 'Loading Mains Data'
 df_mains=load_mains_data(path)
@@ -32,7 +46,7 @@ df_appliances=load_appliances_data(path,labels)
 
 #Downsampling
 print 'Downsampling'
-downsampling_window='15Min'
+downsampling_window='30Min'
 df_mains_downsampled=downsample(df_mains,downsampling_window)
 df_appliances_downsampled=downsample(df_appliances,downsampling_window)
 
@@ -52,7 +66,7 @@ loads_to_mains_mapping=assign_load_to_mains(df_mains_downsampled_aligned, df_app
 
 for app in df_appliances_downsampled_aligned_remove_insignificant:
     if app not in loads_to_mains_mapping:
-        print "DELETING ",app
+        print "DELETING",app
         del df_appliances_downsampled_aligned_remove_insignificant[app]
 
 print loads_to_mains_mapping
