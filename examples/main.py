@@ -3,9 +3,9 @@
 Usage:
     main.py <file_path>
     main.py (-h | --help)
-  
+
 Arguments:
-    file_path Location where data for home is located    
+    file_path Location where data for home is located
 
 Options:
     -sample_width    Width of the sample in mins for downsampling[default: 1min]
@@ -13,31 +13,21 @@ Options:
 
 """
 
-from load_data import load_mains_data
-from load_data import load_labels
-from load_data import load_appliances_data
-from downsample import downsample
-from align_mains_appliances import find_intersection
-from divide_test_train import partition_train_test
-from reject_insignificant_appliances import reject_insignificant_appliance
-from assign_load_to_mains import assign_load_to_mains
-from identify_clusters import return_centroids_labels
-from calibration import calibrate_centroids
-from co import apply_co
-from compute_results import compute_RE_MNE
-from plot_results import draw_table
+from indic.load_data import load_mains_data
+from indic.load_data import load_labels
+from indic.load_data import load_appliances_data
+from indic.downsample import downsample
+from indic.align_mains_appliances import find_intersection
+from indic.reject_insignificant_appliances import reject_insignificant_appliance
+from indic.assign_load_to_mains import assign_load_to_mains
+from indic.identify_clusters import return_centroids_labels
+from indic.calibration import calibrate_centroids
+from indic.co import apply_co
+from indic.compute_results import compute_RE_MNE
+from indic.plot_results import draw_table
+
 import sys
-
-from docopt import docopt
-
-print "I am here"
-arguments = docopt(__doc__, version='NILM commandline utility')
-print "here"
-print(arguments)
-house=9
-path=arguments['<file_path>']
-
-print path
+path = sys.argv[1]
 print 'Loading Mains Data'
 df_mains=load_mains_data(path)
 labels=load_labels(path)
