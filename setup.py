@@ -1,18 +1,17 @@
 from distutils.core import setup
 
 setup(
-    name='NILM',
+    name='indic',
     version='0.1.0',
     author='Nipun Batra',
     author_email='nipunb@iiitd.ac.in',
     packages=['indic'],
     scripts=[],
-    url='http://pypi.python.org/pypi/TowelStuff/',
+    url='https://github.com/nipunreddevil/indic',
     license='',
-    description='Useful towel-related stuff.',
-    long_description="wo",
+    description='Non Intrusive Load Monitoring',
     install_requires=[
-        "Django >= 1.1.1",
+        'numpy>=1.7', 'pandas>=0.12', 'matplotlib>=1.3', 'scikit-learn>=0.13'
        
     ],
 )
