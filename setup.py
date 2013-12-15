@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='indic',
-    version='0.1.0',
+    version='0.1.1',
     author='Nipun Batra',
     author_email='nipunb@iiitd.ac.in',
     packages=['indic'],

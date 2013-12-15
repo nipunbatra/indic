@@ -14,12 +14,8 @@ import random
 def transform_data(df_appliances_train):
     raw_data = {}
     for key in df_appliances_train:
-        data_gt_10 = df_appliances_train[key][
-            df_appliances_train[key] > 10].values
-        raw_data[key] = data_gt_10[
-            np.random.randint(0, len(data_gt_10), len(data_gt_10) / 10)]
+        raw_data[key] = df_appliances_train[key].values
         length = len(raw_data[key])
-        print length, key
         raw_data[key] = raw_data[key].reshape(length, 1)
     return raw_data
 
@@ -33,9 +29,8 @@ def apply_kmeans(X):
     k_means_labels = {}
     k_means_cluster_centers = {}
     k_means_labels_unique = {}
-    for n_clusters in range(2, 3):
-        k_means = KMeans(init='k-means++',
-                         n_clusters=n_clusters, n_jobs=-1, n_init=8)
+    for n_clusters in range(2, 4):
+        k_means = KMeans(init='k-means++', n_clusters=n_clusters)
         k_means.fit(X)
         k_means_labels[n_clusters] = k_means.labels_
         k_means_cluster_centers[n_clusters] = k_means.cluster_centers_
@@ -46,7 +41,7 @@ def apply_kmeans(X):
             sh = sh_n
             num_clus = n_clusters
 
-    return [num_clus + 1, k_means_labels[num_clus], k_means_cluster_centers[num_clus],  k_means_labels_unique[num_clus]]
+    return [num_clus, k_means_labels[num_clus], k_means_cluster_centers[num_clus],  k_means_labels_unique[num_clus]]
 
 
 def return_centroids_labels(df_appliances_train):
