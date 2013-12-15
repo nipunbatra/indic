@@ -11,7 +11,7 @@ setup(
     license='',
     description='Non Intrusive Load Monitoring',
     install_requires=[
-        'numpy>=1.7', 'pandas>=0.12', 'matplotlib>=1.3', 'scikit-learn>=0.13'
-       
+        'numpy>=1.7', 'pandas>=0.12', 'matplotlib>=1.3', 'scikit-learn>=0.13', 'scipy>=0.13'
+
     ],
 )
