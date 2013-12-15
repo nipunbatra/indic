@@ -1,4 +1,22 @@
-'''Peforms NILM analysis on REDD dataset'''
+'''Peforms NILM analysis on REDD dataset
+
+Usage: 
+python redd.py location_of_home_in_redd output_file_name
+
+eg. python /home/nipun/study/datasets/MIT/low_freq/house_1/ 1
+
+This will store the results (Mean Normalized Error and RMS Error)
+in 1.md, which is a markup output_file. You may then use any markup renderer
+for pretty viewing of data
+
+For exploratory analysis, it is recommended that you run the code in an IPython 
+console (with pylab inline)
+
+$ ipython --pylab inline
+
+In [6]: run redd.py /home/nipun/study/datasets/MIT/low_freq/house_1/ 1
+
+'''
 
 from indic.load_data import load_mains_data
 from indic.load_data import load_labels
@@ -8,7 +26,7 @@ from indic.align_mains_appliances import find_intersection
 from indic.divide_test_train import partition_train_test
 from indic.reject_insignificant_appliances import reject_insignificant_appliance
 from indic.assign_load_to_mains import assign_load_to_mains
-from iindic.dentify_clusters import return_centroids_labels
+from indic.identify_clusters import return_centroids_labels
 from indic.calibration import calibrate_centroids
 from indic.co import apply_co
 from indic.compute_results import compute_RE_MNE
@@ -16,7 +34,12 @@ from indic.plot_results import draw_table
 import sys
 
 
+# Path to a REDD home
 path = sys.argv[1]
+
+# Path to save the results
+output_file = sys.argv[2]
+
 print 'Loading Mains Data'
 df_mains = load_mains_data(path)
 labels = load_labels(path)
@@ -25,7 +48,7 @@ df_appliances = load_appliances_data(path, labels)
 
 # Downsampling
 print 'Downsampling'
-downsampling_window = '30Min'
+downsampling_window = '1Min'
 df_mains_downsampled = downsample(df_mains, downsampling_window)
 df_appliances_downsampled = downsample(df_appliances, downsampling_window)
 
@@ -75,4 +98,4 @@ power_states_dict = apply_co(
 [MNE, RE] = compute_RE_MNE(power_states_dict, df_test_appliances)
 
 # Draw table
-draw_table(MNE, RE, str(house))
+draw_table(MNE, RE, output_file)
