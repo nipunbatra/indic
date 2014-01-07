@@ -9,21 +9,34 @@ import pandas as pd
 
 
 def find_intersection(df_mains, df_appliances):
-    # TODO: Try doing using Numpy intersect method
-    '''    
-    a=np.intersect1d(df_mains.index.values,df_appliances.index.values)
-    return a
-    '''
+    """Returns the DatetimeIndex of intersection of mains and appliances
+
+    Parameters
+    ----------
+    df_mains : pandas.DataFrame
+    df_appliances : pandas.DataFrame
+
+    Returns
+    -------
+    DatetimeIndex
+    """
     return pd.Index(np.sort(list(set(df_mains.index).intersection(set(df_appliances.index)))))
 
 
 def find_contigous_times(df, difference=1000):
-    '''
+    """
     Creates a list of type [(start_time, end_time)]
     where each tuple has contiguous data separated.
-    Two consecutive tuples are separated by 'difference'
+    Two consecutive tuples are separated by `difference`
     seconds
-    '''
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+    difference : int, default=1000
+        Maximum gap (in seconds) between readings to chop of a 
+        contiguous time slot
+    """
     idx = np.where(np.diff(df.index.values) / 1e9 > difference)[0]
     if idx.size == 0:
         # Whole data is contiguous

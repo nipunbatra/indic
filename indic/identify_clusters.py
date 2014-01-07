@@ -29,6 +29,7 @@ def apply_kmeans(X):
     k_means_labels = {}
     k_means_cluster_centers = {}
     k_means_labels_unique = {}
+    print X, type(X)
     for n_clusters in range(2, 4):
         k_means = KMeans(init='k-means++', n_clusters=n_clusters)
         k_means.fit(X)
