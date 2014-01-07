@@ -1,12 +1,8 @@
-# -*- coding: utf-8 -*-
+"""Contains functions to align mains and appliances timeseries
 """
-Created on Sat Sep 28 20:45:22 2013
 
-@author: nipun
-"""
 import numpy as np
 import pandas as pd
-
 
 def find_intersection(df_mains, df_appliances):
     """Returns the DatetimeIndex of intersection of mains and appliances
